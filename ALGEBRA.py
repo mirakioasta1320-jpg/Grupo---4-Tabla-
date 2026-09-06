@@ -8,7 +8,7 @@ def evaluar_tabla_verdad():
     print(" 1. VERIFICACIÓN DE TABLA DE VERDAD: CIRCUITO ORIGINAL VS OPTIMIZADO")
     print("=" * 65)
     
-    # Encabezado impreso manualmente con formato
+    
     header = f"{'m':<5} | {'A':<2} {'B':<2} {'C':<2} {'D':<2} | {'F_Orig':<7} | {'F_Opt':<6} | {'Estado':<7}"
     print(header)
     print("-" * len(header))
@@ -19,20 +19,20 @@ def evaluar_tabla_verdad():
         for b in [0, 1]:
             for c in [0, 1]:
                 for d in [0, 1]:
-                    # Cálculo de posición del minitérmino
+                    
                     m_idx = (a << 3) | (b << 2) | (c << 1) | d
                     
-                    # F Original por Minitérminos
+                    
                     f_orig = 1 if m_idx in miniterminos_activos else 0
                     
-                    # F Optimizada: XNOR(B, D) -> 1 si B == D
+                    
                     f_opt = 1 if b == d else 0
                     
                     valido = (f_orig == f_opt)
                     if not valido:
                         totales_coinciden = False
                     
-                    # Imprimir fila con alineación directa
+                    
                     m_str = f"m{m_idx}"
                     estado_str = "OK" if valido else "ERROR"
                     print(f"{m_str:<5} | {a:<2} {b:<2} {c:<2} {d:<2} | {f_orig:<7} | {f_opt:<6} | {estado_str:<7}")
@@ -51,13 +51,13 @@ class AuditoriaPredicados:
     """Modelo formal en Python puro para la evaluación de políticas de seguridad."""
     
     def __init__(self, servidores, procesos, usuarios, ejecuciones, verificados, admins, accesos_escritura):
-        self.S = set(servidores)          # Conjunto S
-        self.P = set(procesos)            # Conjunto P
-        self.U = set(usuarios)            # Conjunto U
-        self.E = set(ejecuciones)        # Relación E(s, p)
-        self.V = set(verificados)       # Predicado V(p)
-        self.A = set(admins)            # Predicado A(u)
-        self.W = set(accesos_escritura)  # Relación W(u, s)
+        self.S = set(servidores)         
+        self.P = set(procesos)           
+        self.U = set(usuarios)           
+        self.E = set(ejecuciones)        
+        self.V = set(verificados)       
+        self.A = set(admins)            
+        self.W = set(accesos_escritura)  
 
     def evaluar_regla_original(self):
         """
@@ -91,9 +91,8 @@ class AuditoriaPredicados:
 def simular_auditoria_seguridad():
     print("=" * 65)
     print(" 2. EVALUACIÓN DE REGLAS DE AUDITORÍA Y SU NEGACIÓN DE MORGAN")
-    print("=" * 65)
-    
-    # Escenario A: Servidor seguro con usuario no-admin con acceso
+    print("=" * 6
+          
     escenario_valido = AuditoriaPredicados(
         servidores=['srv_app_01', 'srv_db_01'],
         procesos=['script_unverified', 'daemon_core'],
@@ -111,7 +110,7 @@ def simular_auditoria_seguridad():
     print(f" - Regla Original: {'CUMPLIDA' if cumple_a else 'VIOLADA'} -> {msg_a1}")
     print(f" - Negación De Morgan: {neg_a} -> {msg_a2}\n")
 
-    # Escenario B: Servidor con proceso no verificado donde SOLO escribe el admin (Infracción)
+
     escenario_infraccion = AuditoriaPredicados(
         servidores=['srv_critico_01'],
         procesos=['malware_process'],
